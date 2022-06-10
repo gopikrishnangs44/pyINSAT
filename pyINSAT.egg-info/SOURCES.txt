@@ -1,8 +1,0 @@
-README.md
-setup.py
-pyINSAT/INSAT_3D.py
-pyINSAT/__init__.py
-pyINSAT.egg-info/PKG-INFO
-pyINSAT.egg-info/SOURCES.txt
-pyINSAT.egg-info/dependency_links.txt
-pyINSAT.egg-info/top_level.txt
