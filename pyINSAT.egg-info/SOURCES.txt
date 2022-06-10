@@ -1,0 +1,8 @@
+README.md
+setup.py
+pyINSAT/__init__.py
+pyINSAT/pyINSAT.py
+pyINSAT.egg-info/PKG-INFO
+pyINSAT.egg-info/SOURCES.txt
+pyINSAT.egg-info/dependency_links.txt
+pyINSAT.egg-info/top_level.txt
