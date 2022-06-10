@@ -12,13 +12,12 @@ import calendar
 
 X, Y = np.arange(50,100,0.1), np.arange(0,50,0.1)
 X1,Y1 = np.meshgrid(X,Y)
-levs = [1000,950,920,850,780,700,620,500,400,300,250,200,150,100]
-nul = xr.DataArray(np.zeros([500, 500], dtype=int),coords=[Y,X], dims=['lat','lon'])
-nul = nul.where(nul!=0, np.nan)
-nul = xr.DataArray(np.zeros([14,500, 500], dtype=int),coords=[levs,Y,X], dims=['lev','lat','lon'])
-nul_3d = nul.where(nul!=0, np.nan)
+#levs = [1000,950,920,850,780,700,620,500,400,300,250,200,150,100]
 
-def INSAT_PROF(mole,time,dt, sat='', input_dir='',output_dir=''):
+
+def INSAT_PROF(mole,time,dt, sat='', input_dir='',output_dir='',levs=[]):
+    nul_3d = xr.DataArray(np.zeros([len(levs),500, 500], dtype=int),coords=[levs,Y,X], dims=['lev','lat','lon'])
+    nul_3d = nul_3d.where(nul_3d!=0, np.nan)
     for i in range(0,len(dt)):
         files = sorted(glob.glob(''+str(input_dir)+''+str(sat)+'SND_'+dt[i].strftime('%d')+''+calendar.month_abbr[int(dt[i].strftime('%m'))].upper()+'20'+dt[i].strftime('%y')+'_'+str(time)+'*.h5'))
         if files == []:
@@ -33,14 +32,11 @@ def INSAT_PROF(mole,time,dt, sat='', input_dir='',output_dir=''):
                     lat,lon = np.array(a["Latitude"])*0.01, np.array(a["Longitude"])*0.01
                     Z = np.array(a[''+str(mole)+''])
                     leev = np.array(a['plevels']).tolist()
-                    jj1 = []
-                    for e in levs:
-                        jj1.append(leev.index(e))
                     zz = []
-                    for h in jj1:
+                    for e in levs:
                         try:
-                            print(h,''+str(mole)+'','DONE!!!!!')
-                            Z = np.array(a[''+str(mole)+''])[0,h,:,:]
+                            print(e,''+str(mole)+'','DONE!!!!!')
+                            Z = np.array(a[''+str(mole)+''])[0,leev.index(e),:,:]
                             points = np.array( (lon.flatten(), lat.flatten()) ).T
                             values = Z.flatten()
                             Z0 = griddata( points, values, (X1,Y1), method='nearest' )
@@ -58,6 +54,8 @@ def INSAT_PROF(mole,time,dt, sat='', input_dir='',output_dir=''):
                 pass
 
 def INSAT_TC(mole,time,dt, sat='', input_dir='',output_dir=''):
+    nul = xr.DataArray(np.zeros([500, 500], dtype=int),coords=[Y,X], dims=['lat','lon'])
+    nul = nul.where(nul!=0, np.nan)
     for i in range(0,len(dt)):
         files = sorted(glob.glob(''+str(input_dir)+''+str(sat)+'SND_'+dt[i].strftime('%d')+''+calendar.month_abbr[int(dt[i].strftime('%m'))].upper()+'20'+dt[i].strftime('%y')+'_'+str(time)+'*.h5'))
         if files == []:
