@@ -4,9 +4,12 @@ To install, download the repository
 
 follow the steps
 
-cd pyINSAT
+1. cd pyINSAT
 
-python setup.py install
+2. python setup.py install
+
+
+
 
 see the EXAMPLE.ipynb file for usage of the package
 
