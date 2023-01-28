@@ -1,10 +1,12 @@
 Python package for INSAT 3D and 3DR
 
-Author: Gopikrishnan G S
+To install, download the repository
 
-Institute : Indian Institute of Technology Kharagpur
+follow the steps
 
-www.atmoslabiitkgp.com
+cd pyINSAT
 
-www.github.com/gopikrishnangs44
+python setup.py install
+
+see the EXAMPLE.ipynb file for usage of the package
 
