@@ -49,6 +49,7 @@ def INSAT_PROF(mole,time,dt, sat='', input_dir='',output_dir='',levs=[]):
                                 zz.append(np.array(nul))
                         z2 = np.array(zz)
                         dat = xr.DataArray(z2, coords=[levs, Y, X], dims=['lev','lat','lon'])
+                        dat = dat.expand_dims(time=dt)
                         dat.to_netcdf(''+str(output_dir)+''+str(sat)+'_'+str(mole)+'_20'+str(dt[i].strftime('%y'))+''+str(dt[i].strftime('%m'))+''+str(dt[i].strftime('%d'))+'.nc')
                         zz = []
                 except:
@@ -78,6 +79,7 @@ def INSAT_TC(mole,time,dt, sat='', input_dir='',output_dir=''):
                     z1 = np.array(Z0)
                     z1[z1<0] = np.nan
                     dat = xr.DataArray(z1, coords=[Y,X], dims=['lat','lon'])
+                    dat = dat.expand_dims(time=dt)
                     dat.to_netcdf(''+str(output_dir)+''+str(sat)+'_'+str(mole)+'_20'+str(dt[i].strftime('%y'))+''+str(dt[i].strftime('%m'))+''+str(dt[i].strftime('%d'))+'_'+str(time)+'.nc')
     except:
         print('ERROR')
