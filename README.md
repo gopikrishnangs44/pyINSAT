@@ -1,4 +1,4 @@
-Python package for INSAT 3D and 3DR
+Python package for INSAT 3D and 3DR sounder data
 
 To install, download the repository
 
