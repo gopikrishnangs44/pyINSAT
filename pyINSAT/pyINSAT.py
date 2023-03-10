@@ -24,6 +24,7 @@ def INSAT_PROF(mole,time,dt, sat='', input_dir='',output_dir='',levs=[]):
             if files == []:
                 print(''+str(mole)+'','NO_DATA or ERROR')
                 dat = nul_3d
+                dat = dat.expand_dims(time=dt)
                 dat.to_netcdf(''+str(output_dir)+''+str(sat)+'_'+str(mole)+'_20'+str(dt[i].strftime('%y'))+''+str(dt[i].strftime('%m'))+''+str(dt[i].strftime('%d'))+'.nc')
             else:
                 try:
@@ -66,6 +67,7 @@ def INSAT_TC(mole,time,dt, sat='', input_dir='',output_dir=''):
             if files == []:
                 dat = nul
                 print('NO DATA or ERROR')
+                dat = dat.expand_dims(time=dt)
                 dat.to_netcdf(''+str(output_dir)+''+str(sat)+'_'+str(mole)+'_20'+str(dt[i].strftime('%y'))+''+str(dt[i].strftime('%m'))+''+str(dt[i].strftime('%d'))+'.nc')
             else:
                 for q in files:
