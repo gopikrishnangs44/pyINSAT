@@ -4,9 +4,9 @@ To install, download the repository
 
 follow the steps
 
-1. cd pyINSAT
+1. cd pyINSAT-main
 
-2. python setup.py install
+2. pip install .
 
 
 
